@@ -10,6 +10,8 @@
 
 @interface KKDetailsViewController : UIViewController
 
+@property (weak, nonatomic) NSDictionary *titleDetails;
+
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end

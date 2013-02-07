@@ -116,7 +116,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="kfc-DW-6u8" kind="push" id="Uop-zo-YZG"/>
+                                    <segue destination="kfc-DW-6u8" kind="push" identifier="ShowDetails" id="Uop-zo-YZG"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
