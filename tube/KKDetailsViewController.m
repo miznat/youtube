@@ -26,6 +26,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = self.titleDetails[@"title"];
+    self.textView.text = self.titleDetails[@"description"];
+    
 	// Do any additional setup after loading the view.
 }
 
