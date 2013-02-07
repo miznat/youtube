@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3012" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Ycg-Rx-2KP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Ycg-Rx-2KP">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -116,7 +116,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="kfc-DW-6u8" kind="push" id="Uop-zo-YZG"/>
+                                    <segue destination="kfc-DW-6u8" kind="push" identifier="ShowDetails" id="Uop-zo-YZG"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -131,10 +131,10 @@
             </objects>
             <point key="canvasLocation" x="-884" y="-646"/>
         </scene>
-        <!--View Controller-->
+        <!--Details View Controller-->
         <scene sceneID="gIc-Yj-HaH">
             <objects>
-                <viewController id="kfc-DW-6u8" sceneMemberID="viewController">
+                <viewController id="kfc-DW-6u8" customClass="KKDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RSl-dl-IEf">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -157,6 +157,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cKt-qT-UXe"/>
+                    <connections>
+                        <outlet property="textView" destination="cdN-P0-Que" id="qMg-N0-g9r"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NK8-gG-5ss" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -181,14 +184,6 @@
     <resources>
         <image name="fakeThumbnail.png" width="202" height="160"/>
     </resources>
-    <classes>
-        <class className="KKViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/KKViewController.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

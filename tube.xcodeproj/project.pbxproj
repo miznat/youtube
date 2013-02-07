@@ -29,6 +29,7 @@
 		33B5EB9416C07AFD00FEF5F1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33B5EB9316C07AFD00FEF5F1 /* Default-568h@2x.png */; };
 		33B5EB9716C07AFD00FEF5F1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33B5EB9516C07AFD00FEF5F1 /* MainStoryboard.storyboard */; };
 		33B5EBA616C07F0D00FEF5F1 /* KKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B5EBA516C07F0D00FEF5F1 /* KKViewController.m */; };
+		83A6A6D616C3E890003E2313 /* KKDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A6A6D516C3E890003E2313 /* KKDetailsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,8 @@
 		33B5EB9616C07AFD00FEF5F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		33B5EBA416C07F0D00FEF5F1 /* KKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKViewController.h; sourceTree = "<group>"; };
 		33B5EBA516C07F0D00FEF5F1 /* KKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKViewController.m; sourceTree = "<group>"; };
+		83A6A6D416C3E890003E2313 /* KKDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKDetailsViewController.h; sourceTree = "<group>"; };
+		83A6A6D516C3E890003E2313 /* KKDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKDetailsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +186,8 @@
 			children = (
 				33B5EBA416C07F0D00FEF5F1 /* KKViewController.h */,
 				33B5EBA516C07F0D00FEF5F1 /* KKViewController.m */,
+				83A6A6D416C3E890003E2313 /* KKDetailsViewController.h */,
+				83A6A6D516C3E890003E2313 /* KKDetailsViewController.m */,
 			);
 			name = Channels;
 			sourceTree = "<group>";
@@ -267,6 +272,7 @@
 				339DAD7716C1534E00D2DE94 /* AFXMLRequestOperation.m in Sources */,
 				339DAD7816C1534E00D2DE94 /* UIImageView+AFNetworking.m in Sources */,
 				334DF7AC16C31E6B00FB642D /* CustomCell.m in Sources */,
+				83A6A6D616C3E890003E2313 /* KKDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

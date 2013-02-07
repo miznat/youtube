@@ -12,6 +12,7 @@
 
 #import "AFJSONRequestOperation.h"
 
+#import "KKDetailsViewController.h"
 
 #import "CustomCell.h"
 
@@ -203,17 +204,26 @@
 }
 */
 
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    if ([segue.identifier isEqualToString:@"ShowDetails"])
+    {
+        NSDictionary *titleDetails = [self.videoMetaData objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
+        [segue.destinationViewController setTitleDetails:titleDetails];
+    }
 }
+
+//#pragma mark - Table view delegate
+//
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // Navigation logic may go here. Create and push another view controller.
+//    /*
+//     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+//     // ...
+//     // Pass the selected object to the new view controller.
+//     [self.navigationController pushViewController:detailViewController animated:YES];
+//     */
+//}
 
 @end
