@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) NSDictionary *importVideoMetaData;
 
-@property (weak, nonatomic) NSDictionary *importAllThumbnails;
+@property (weak, nonatomic) NSDictionary *importThumbnail;
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 

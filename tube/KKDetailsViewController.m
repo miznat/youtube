@@ -39,12 +39,14 @@
     
     //self.imageView.image = [self.importAllThumbnails objectForKey:@"hqDefault"];
     
+    
+    
     self.imageView.image = [[UIImage alloc] init];
-    self.imageView.image =[UIImage imageNamed:[(NSDictionary *)self.importAllThumbnails objectForKey:@"hqDefault"]];
+    self.imageView.image = [UIImage imageNamed:[(NSDictionary *)self.importThumbnail objectForKey:@"hqDefault"]];
     
     //self.imageView = [UIImage imageNamed: @"hqDefault"];
     
-    NSLog(@" video Meta Data %@", self.importAllThumbnails);
+    NSLog(@" imported thumbnail %@", self.importThumbnail);
 
     
 }

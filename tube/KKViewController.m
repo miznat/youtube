@@ -171,7 +171,7 @@
         
         NSDictionary *importAllThumbnails = [self.allThumbnails objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         
-        [segue.destinationViewController setImportAllThumbnails:importAllThumbnails];
+        [segue.destinationViewController setImportThumbnail:importAllThumbnails];
         
     }
 }
