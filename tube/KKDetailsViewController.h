@@ -10,8 +10,11 @@
 
 @interface KKDetailsViewController : UIViewController
 
-@property (weak, nonatomic) NSDictionary *titleDetails;
+@property (weak, nonatomic) NSDictionary *importVideoMetaData;
+
+@property (weak, nonatomic) NSDictionary *importAllThumbnails;
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @end

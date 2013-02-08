@@ -10,15 +10,11 @@
 
 @interface KKViewController : UITableViewController {
     
-  NSMutableArray *_videoMetaData;
-    
 }
 
 @property (nonatomic, retain) NSMutableArray *videoMetaData;
 
 
 @property (nonatomic, retain) NSMutableArray *allThumbnails;
-
-
 
 @end

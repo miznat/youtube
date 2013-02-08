@@ -8,6 +8,7 @@
 
 #import "KKDetailsViewController.h"
 
+
 @interface KKDetailsViewController ()
 
 @end
@@ -27,10 +28,25 @@
 {
     [super viewDidLoad];
     
-    self.title = self.titleDetails[@"title"];
-    self.textView.text = self.titleDetails[@"description"];
     
-	// Do any additional setup after loading the view.
+    // This will set the video title on the nav bar
+    
+    //self.title = self.importVideoMetaData[@"title"];
+    
+    //self.textView.text = self.importVideoMetaData[@"description"];
+    
+    self.textView.text = [self.importVideoMetaData objectForKey:@"description"];
+    
+    //self.imageView.image = [self.importAllThumbnails objectForKey:@"hqDefault"];
+    
+    self.imageView.image = [[UIImage alloc] init];
+    self.imageView.image =[UIImage imageNamed:[(NSDictionary *)self.importAllThumbnails objectForKey:@"hqDefault"]];
+    
+    //self.imageView = [UIImage imageNamed: @"hqDefault"];
+    
+    NSLog(@" video Meta Data %@", self.importAllThumbnails);
+
+    
 }
 
 - (void)didReceiveMemoryWarning
