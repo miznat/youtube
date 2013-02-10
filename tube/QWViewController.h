@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KKViewController : UITableViewController {
+@interface QWViewController : UITableViewController {
     
 }
 
@@ -17,10 +17,7 @@
 
 @property (nonatomic, retain) NSMutableArray *allThumbnails;
 
-
-@property (nonatomic, retain) NSMutableArray *videoID;
-
-
 @property (weak, nonatomic) IBOutlet UIImageView *cellimage;
 
 @end
+

@@ -8,6 +8,8 @@
 
 #import "KKDetailsViewController.h"
 
+#import "AFNetworking.h"
+
 
 @interface KKDetailsViewController ()
 
@@ -37,18 +39,20 @@
     
     self.textView.text = [self.importVideoMetaData objectForKey:@"description"];
     
-    //self.imageView.image = [self.importAllThumbnails objectForKey:@"hqDefault"];
+    //NSLog(@" imported HQ thumbnail %@", self.textView.text);
     
+    NSURL *url = [[NSURL alloc] initWithString:[self.importThumbnail objectForKey:@"hqDefault"]];
     
+    [self.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"fakeThumbnail.png"]];
     
-    self.imageView.image = [[UIImage alloc] init];
-    self.imageView.image = [UIImage imageNamed:[(NSDictionary *)self.importThumbnail objectForKey:@"hqDefault"]];
+    NSLog(@" imported HQ thumbnail %@", url);
     
-    //self.imageView = [UIImage imageNamed: @"hqDefault"];
+    //self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
-    NSLog(@" imported thumbnail %@", self.importThumbnail);
 
     
+    
+        
 }
 
 - (void)didReceiveMemoryWarning

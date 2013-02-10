@@ -58,6 +58,9 @@
        
        self.allThumbnails = [JSON valueForKeyPath:@"data.items.video.thumbnail"];
        
+       // Grab the video ID
+       
+       self.videoID = [JSON valueForKeyPath:@"data.items.video.id"];
        
        // The table need to be reloaded or else we will get an empty table.
        
@@ -102,46 +105,19 @@
 
 
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    static NSString *cellID = @"Cell";
-//    
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-//    
-//    if (!cell) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
-//    }
-//    
-//    
-//    // Creating a NSDictionary. this will hold all the keys and their respective objects.
-//    
-//    
-//    NSDictionary *titles = [self.videoMetaData objectAtIndex:indexPath.row];
-//    
-//    cell.textLabel.text = [titles objectForKey:@"title"];
-//    cell.detailTextLabel.text = [titles objectForKey:@"description"];
-//    
-//    NSDictionary *thumbnails = [self.allThumbnails objectAtIndex:indexPath.row];
-//    
-//    //NSLog(@"%@",thumbnails);
-//    
-//    NSURL *url = [[NSURL alloc] initWithString:[thumbnails objectForKey:@"hqDefault"]];
-//    
-//    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"fakeThumbnail.png"]];
-//    
-//    return cell;
-//}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellID = @"Cell";
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellID = @"Cell";
     
-    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID];
-    if (cell == nil) {
-        cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellID];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     }
     
-    // Configure the cell...
+    
+    // Creating a NSDictionary. this will hold all the keys and their respective objects.
+    
+    
     NSDictionary *titles = [self.videoMetaData objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [titles objectForKey:@"title"];
@@ -155,10 +131,14 @@
     
     [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"fakeThumbnail.png"]];
     
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    return cell;
+    cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
+    //cell.imageView.contentMode = UIViewContentModeCenter;
+    
+    return cell;
 }
+
+
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -167,26 +147,29 @@
     {
         NSDictionary *importVideoMetaData = [self.videoMetaData objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         
+        // Sending video metadata to the next view
+        
         [segue.destinationViewController setImportVideoMetaData:importVideoMetaData];
         
-        NSDictionary *importAllThumbnails = [self.allThumbnails objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
+        NSDictionary *importThumbnail = [self.allThumbnails objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         
-        [segue.destinationViewController setImportThumbnail:importAllThumbnails];
+        // Sending thumbnails to the next view
+        
+        [segue.destinationViewController setImportThumbnail:importThumbnail];
+        
+        
+        NSLog(@" sending HQ & SQ thumbnails %@", importThumbnail);
+        
+        // Sending the video ID to the next view
+        
+        NSDictionary *importVideoID = [self.videoID objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
+        
+        [segue.destinationViewController setImportVideoID:importVideoID];
+        
+        NSLog(@" sending video ID %@", importVideoID);
         
     }
 }
 
-//#pragma mark - Table view delegate
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    // Navigation logic may go here. Create and push another view controller.
-//    /*
-//     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-//     // ...
-//     // Pass the selected object to the new view controller.
-//     [self.navigationController pushViewController:detailViewController animated:YES];
-//     */
-//}
 
 @end
