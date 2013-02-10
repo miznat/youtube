@@ -171,6 +171,12 @@
         
         [segue.destinationViewController setImportThumbnail:importAllThumbnails];
         
+        NSDictionary *importVideoID = [self.videoID objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
+        
+        [segue.destinationViewController setImportVideoID:importVideoID];
+        
+        NSLog(@" sending video ID %@", importVideoID);
+        
     }
 }
 

@@ -19,5 +19,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *cellimage;
 
+
+@property (nonatomic, retain) NSMutableArray *videoID;
+
 @end
 
