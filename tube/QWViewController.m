@@ -27,6 +27,7 @@
 
 @implementation QWViewController
 
+@synthesize myJSON;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -101,10 +102,10 @@
         NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
     }];
     
+    return (NSDictionary *)self.myJSON;
     
     [operation start];
     
-    return (NSDictionary *)self.myJSON;
     
 }
 
