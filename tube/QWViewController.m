@@ -23,11 +23,7 @@
 @end
 
 
-@interface NSDictionary()
 
--(void)loadVideoFromURL:(NSURL *)url;
-
-@end
 
 @implementation QWViewController
 
@@ -63,7 +59,7 @@
     
     NSURL *myurl = [NSURL URLWithString:urlAsString];
     
-    [self loadVideoFromURL:myurl];
+    self.myJSON = [self loadVideoFromURL:myurl];
     
     
     
@@ -90,7 +86,7 @@
 
 
 
--(void)loadVideoFromURL:(NSURL *)url {
+-(NSDictionary*)loadVideoFromURL:(NSURL *)url {
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     // setup AFNetworking stuff
@@ -99,7 +95,7 @@
         
         self.myJSON = (NSDictionary *)JSON;
         
-       // NSLog(@" json loadvideo from url %@", self.myJSON);
+        //NSLog(@" json loadvideo from url %@", self.myJSON);
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
@@ -107,6 +103,8 @@
     
     
     [operation start];
+    
+    return (NSDictionary *)self.myJSON;
     
 }
 
