@@ -40,10 +40,11 @@
     return self;
 }
 
-- (void)viewDidLoad
+- (void)viewWillAppear
 {
-    [super viewDidLoad];
+    //[super viewDidLoad];
     
+    NSLog(@" video Meta Data %@", self.myJSON);
     // link to the youtube channel or playlist NOTE: JSON and JSONC are not the same. Use JSONC, as far as i recall, its customised for youtube.
     
     NSString *urlAsString = @"http://gdata.youtube.com/feeds/api/playlists/PL7CF5B0AC3B1EB1D5?v=2&alt=jsonc&max-results=50";
@@ -83,7 +84,7 @@
         
         self.myJSON = (NSDictionary *)JSON;
         
-        NSLog(@" json %@", self.myJSON);
+       // NSLog(@" json %@", self.myJSON);
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
