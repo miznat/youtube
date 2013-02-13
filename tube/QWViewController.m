@@ -18,6 +18,14 @@
 
 @interface QWViewController ()
 
+-(void)loadVideoFromURL:(NSURL *)url;
+
+@end
+
+@interface NSURL()
+
+-(void)loadVideoFromURL:(NSURL *)url;
+
 @end
 
 @implementation QWViewController
@@ -41,22 +49,20 @@
     NSString *urlAsString = @"http://gdata.youtube.com/feeds/api/playlists/PLF65D15C302248F87?v=2&alt=jsonc&max-results=50";
     
     
-    NSURL *url = [NSURL URLWithString:urlAsString];
+    NSURL *myurl = [NSURL URLWithString:urlAsString];
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    // This will initiate the request and parse the data using apples JSONSerialization
+    NSURL *urlcontent = [self loadVideoFromURL:myurl];
     
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        
-        
         // I am using self.videoMetaData. I am defining it in the .h file as a property. This will let me use it anywhere in this .m file.
         
-        self.videoMetaData = [JSON valueForKeyPath:@"data.items.video"];
+        self.videoMetaData = [self.myJSON valueForKeyPath:@"data.items.video"];
         
+        NSLog(@" video Meta Data %@", myurl);
+    
         // This will have all the sq and hq thumbnails
         
-        self.allThumbnails = [JSON valueForKeyPath:@"data.items.video.thumbnail"];
+        self.allThumbnails = [urlcontent valueForKeyPath:@"data.items.video.thumbnail"];
         
         
         // The table need to be reloaded or else we will get an empty table.
@@ -65,6 +71,19 @@
         
         // NSLog(@" video Meta Data %@", self.videoMetaData);
         
+}
+     
+
+-(void)loadVideoFromURL:(NSURL *)url {
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    // setup AFNetworking stuff
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        // call delegate or processing method on success
+        
+        self.myJSON = (NSDictionary *)JSON;
+        
+        NSLog(@" json %@", self.myJSON);
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
@@ -72,7 +91,6 @@
     
     
     [operation start];
-    
     
 }
 
@@ -170,12 +188,6 @@
         NSDictionary *importAllThumbnails = [self.allThumbnails objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         
         [segue.destinationViewController setImportThumbnail:importAllThumbnails];
-        
-        NSDictionary *importVideoID = [self.videoID objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
-        
-        [segue.destinationViewController setImportVideoID:importVideoID];
-        
-        NSLog(@" sending video ID %@", importVideoID);
         
     }
 }

@@ -17,10 +17,9 @@
 
 @property (nonatomic, retain) NSMutableArray *allThumbnails;
 
+@property (nonatomic, retain) NSDictionary *myJSON;
+
 @property (weak, nonatomic) IBOutlet UIImageView *cellimage;
-
-
-@property (nonatomic, retain) NSMutableArray *videoID;
 
 @end
 

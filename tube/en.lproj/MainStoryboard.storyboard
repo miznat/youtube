@@ -89,25 +89,25 @@
         <scene sceneID="m5i-Lp-Eq4">
             <objects>
                 <tableViewController id="u86-Lr-0zV" customClass="KKViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="pY2-1s-nki">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="99" sectionHeaderHeight="22" sectionFooterHeight="22" id="pY2-1s-nki">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="Lpz-NU-9Nc" detailTextLabel="5ow-0d-g0o" rowHeight="100" style="IBUITableViewCellStyleSubtitle" id="ijS-hY-9sf">
-                                <rect key="frame" x="0.0" y="22" width="320" height="100"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="Lpz-NU-9Nc" detailTextLabel="5ow-0d-g0o" rowHeight="99" style="IBUITableViewCellStyleSubtitle" id="ijS-hY-9sf" customClass="CustomCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="99"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="99"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="98"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="29" translatesAutoresizingMaskIntoConstraints="NO" id="Lpz-NU-9Nc">
-                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="33" translatesAutoresizingMaskIntoConstraints="NO" id="Lpz-NU-9Nc">
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="44" translatesAutoresizingMaskIntoConstraints="NO" id="5ow-0d-g0o">
-                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="47" translatesAutoresizingMaskIntoConstraints="NO" id="5ow-0d-g0o">
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                             <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </label>
@@ -197,7 +197,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="nbs-gY-hdt" detailTextLabel="wXF-Kv-8Ma" rowHeight="100" style="IBUITableViewCellStyleSubtitle" id="cPw-Ur-Lke">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="nbs-gY-hdt" detailTextLabel="wXF-Kv-8Ma" style="IBUITableViewCellStyleSubtitle" id="cPw-Ur-Lke">
                                 <rect key="frame" x="0.0" y="22" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -233,7 +233,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="anB-tX-Z55" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-880" y="-646"/>
+            <point key="canvasLocation" x="-802" y="-646"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="MV3-HO-gMc">
@@ -276,10 +276,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wgp-kc-IjC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-392" y="-648"/>
+            <point key="canvasLocation" x="-314" y="-648"/>
         </scene>
     </scenes>
     <classes>
+        <class className="CustomCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomCell.h"/>
+        </class>
         <class className="KKDetailsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/KKDetailsViewController.h"/>
             <relationships>

@@ -46,7 +46,6 @@
     [self.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"fakeThumbnail.png"]];
     
     NSLog(@" imported HQ thumbnail %@", url);
-    
     //self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
 
