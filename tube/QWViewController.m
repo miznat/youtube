@@ -22,6 +22,7 @@
 
 @end
 
+
 @interface NSDictionary()
 
 -(void)loadVideoFromURL:(NSURL *)url;
@@ -40,9 +41,20 @@
     return self;
 }
 
-- (void)viewWillAppear
+
+- (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
+}
+
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
     //[super viewDidLoad];
+    
+    
     
     NSLog(@" video Meta Data %@", self.myJSON);
     // link to the youtube channel or playlist NOTE: JSON and JSONC are not the same. Use JSONC, as far as i recall, its customised for youtube.
@@ -59,7 +71,7 @@
         
         self.videoMetaData = [self.myJSON valueForKeyPath:@"data.items.video"];
         
-        NSLog(@" video Meta Data %@", self.myJSON);
+        NSLog(@" JSON view will apear %@", self.myJSON);
     
         // This will have all the sq and hq thumbnails
         
@@ -75,6 +87,9 @@
 }
 
 
+
+
+
 -(void)loadVideoFromURL:(NSURL *)url {
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -84,7 +99,7 @@
         
         self.myJSON = (NSDictionary *)JSON;
         
-       // NSLog(@" json %@", self.myJSON);
+       // NSLog(@" json loadvideo from url %@", self.myJSON);
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
