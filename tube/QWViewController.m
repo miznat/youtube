@@ -22,7 +22,7 @@
 
 @end
 
-@interface NSURL()
+@interface NSDictionary()
 
 -(void)loadVideoFromURL:(NSURL *)url;
 
@@ -51,18 +51,19 @@
     
     NSURL *myurl = [NSURL URLWithString:urlAsString];
     
+    [self loadVideoFromURL:myurl];
     
-    NSURL *urlcontent = [self loadVideoFromURL:myurl];
+    
     
         // I am using self.videoMetaData. I am defining it in the .h file as a property. This will let me use it anywhere in this .m file.
         
         self.videoMetaData = [self.myJSON valueForKeyPath:@"data.items.video"];
         
-        NSLog(@" video Meta Data %@", myurl);
+        NSLog(@" video Meta Data %@", self.myJSON);
     
         // This will have all the sq and hq thumbnails
         
-        self.allThumbnails = [urlcontent valueForKeyPath:@"data.items.video.thumbnail"];
+       // self.allThumbnails = [urlcontent valueForKeyPath:@"data.items.video.thumbnail"];
         
         
         // The table need to be reloaded or else we will get an empty table.
@@ -72,7 +73,7 @@
         // NSLog(@" video Meta Data %@", self.videoMetaData);
         
 }
-     
+
 
 -(void)loadVideoFromURL:(NSURL *)url {
     
@@ -83,7 +84,7 @@
         
         self.myJSON = (NSDictionary *)JSON;
         
-        NSLog(@" json %@", self.myJSON);
+       // NSLog(@" json %@", self.myJSON);
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
