@@ -41,9 +41,15 @@ int counter;
     counter = 0;
     NSString *urlAsString = @"http://gdata.youtube.com/feeds/api/playlists/PL7CF5B0AC3B1EB1D5?v=2&alt=jsonc&max-results=50";
     NSString *urlAsString2 = @"http://gdata.youtube.com/feeds/api/playlists/PL7CF5B0AC3B1EB1D5?v=2&alt=jsonc&max-results=50&start-index=51";
+    
     self.urlStrings = @[urlAsString,urlAsString2];
+    
     self.allThumbnails = [NSMutableArray array];
+    
     self.videoMetaData = [NSMutableArray array];
+    
+    self.videoID = [NSMutableArray array];
+    
     [self getJSONFromURL:self.urlStrings[0]];
 }
 
@@ -52,11 +58,19 @@ int counter;
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+       
         self.myJSON = [JSON valueForKey:@"data"];
+        
         [self.allThumbnails addObjectsFromArray:[self.myJSON valueForKeyPath:@"items.video.thumbnail"]];
+       
         [self.videoMetaData  addObjectsFromArray:[self.myJSON valueForKeyPath:@"items.video"]];
+        
+        [self.videoID addObjectsFromArray:[self.myJSON valueForKeyPath:@"items.video.id"]];
+        
         [self.tableView reloadData];
+        
         counter += 1;
+        
         if (counter < self.urlStrings.count) [self getJSONFromURL:self.urlStrings[counter]];
     }
         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);}];
@@ -110,6 +124,7 @@ int counter;
     NSDictionary *titles = [self.videoMetaData objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [titles objectForKey:@"title"];
+    
     cell.detailTextLabel.text = [titles objectForKey:@"description"];
     
     NSDictionary *thumbnails = [self.allThumbnails objectAtIndex:indexPath.row];
