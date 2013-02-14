@@ -18,16 +18,10 @@
 
 @interface QWViewController ()
 
--(void)loadVideoFromURL:(NSURL *)url;
-
 @end
-
-
-
 
 @implementation QWViewController
 
-@synthesize myJSON;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -39,40 +33,38 @@
 }
 
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-}
-
-
 -(void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
     //[super viewDidLoad];
     
-    
-    
-    NSLog(@" video Meta Data %@", self.myJSON);
-    // link to the youtube channel or playlist NOTE: JSON and JSONC are not the same. Use JSONC, as far as i recall, its customised for youtube.
-    
     NSString *urlAsString = @"http://gdata.youtube.com/feeds/api/playlists/PL7CF5B0AC3B1EB1D5?v=2&alt=jsonc&max-results=50";
     
-    NSURL *myurl = [NSURL URLWithString:urlAsString];
     
-    self.myJSON = [self loadVideoFromURL:myurl];
+    // I am not sure how i am supposed to populate the uitableview with the second link :(
+    
+     NSString *urlAsString2 = @"http://gdata.youtube.com/feeds/api/playlists/PL7CF5B0AC3B1EB1D5?v=2&alt=jsonc&max-results=50&start-index=51";
     
     
     
-        // I am using self.videoMetaData. I am defining it in the .h file as a property. This will let me use it anywhere in this .m file.
+    self.myurl = [NSURL URLWithString:urlAsString];
+ 
+    [self getJSONfromURL:self.myurl];
+    
+    
+}
+
+
+-(void)viewDidAppear:(BOOL)animated {
+    
+        [super viewDidAppear:animated]; 
+    
+        self.videoMetaData = [self.myJSON valueForKeyPath:@"items.video"];
+    
+        NSLog(@" QQVC video Meta Data %@", self.videoMetaData);
+    
         
-        self.videoMetaData = [self.myJSON valueForKeyPath:@"data.items.video"];
-        
-        NSLog(@" JSON view will apear %@", self.myJSON);
-    
-        // This will have all the sq and hq thumbnails
-        
-       // self.allThumbnails = [urlcontent valueForKeyPath:@"data.items.video.thumbnail"];
+        self.allThumbnails = [self.myJSON valueForKeyPath:@"data.items.video.thumbnail"];
         
         
         // The table need to be reloaded or else we will get an empty table.
@@ -81,33 +73,37 @@
         
         // NSLog(@" video Meta Data %@", self.videoMetaData);
         
+    
 }
 
 
-
-
-
--(NSDictionary*)loadVideoFromURL:(NSURL *)url {
+-(void)getJSONfromURL:(NSURL *)url {
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     // setup AFNetworking stuff
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         // call delegate or processing method on success
         
-        self.myJSON = (NSDictionary *)JSON;
+       // [self.myJSON = (NSArray *)JSON];
         
-        //NSLog(@" json loadvideo from url %@", self.myJSON);
+        self.myJSON = [JSON valueForKey:@"data"];
+        
+       //NSLog(@" in get JSon method %@", self.myJSON);
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
     }];
     
-    return (NSDictionary *)self.myJSON;
     
     [operation start];
-    
-    
 }
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -203,6 +199,12 @@
         NSDictionary *importAllThumbnails = [self.allThumbnails objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         
         [segue.destinationViewController setImportThumbnail:importAllThumbnails];
+        
+        NSDictionary *importVideoID = [self.videoID objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
+        
+        [segue.destinationViewController setImportVideoID:importVideoID];
+        
+        NSLog(@" sending video ID %@", importVideoID);
         
     }
 }

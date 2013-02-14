@@ -52,7 +52,14 @@
        
        // I am using self.videoMetaData. I am defining it in the .h file as a property. This will let me use it anywhere in this .m file.
        
-       self.videoMetaData = [JSON valueForKeyPath:@"data.items.video"];
+       
+       self.myJSON = [JSON valueForKey:@"data"];
+       
+       self.videoMetaData = [self.myJSON valueForKeyPath:@"items.video"];
+
+       NSLog(@" KKVC video Meta Data %@", self.videoMetaData);
+       
+       
        
        // This will have all the sq and hq thumbnails
        

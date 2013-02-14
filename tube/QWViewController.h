@@ -14,12 +14,15 @@
 
 @property (nonatomic, retain) NSMutableArray *videoMetaData;
 
-
 @property (nonatomic, retain) NSMutableArray *allThumbnails;
 
-@property (nonatomic, retain) NSDictionary *myJSON;
+@property (nonatomic, retain) NSMutableArray *myJSON;
+
+@property (nonatomic, retain) NSURL *myurl;
 
 @property (weak, nonatomic) IBOutlet UIImageView *cellimage;
+
+@property (nonatomic, retain) NSMutableArray *videoID;
 
 @end
 

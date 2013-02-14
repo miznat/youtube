@@ -14,6 +14,7 @@
 
 @property (nonatomic, retain) NSMutableArray *videoMetaData;
 
+@property (nonatomic, retain) NSMutableArray *myJSON;
 
 @property (nonatomic, retain) NSMutableArray *allThumbnails;
 
