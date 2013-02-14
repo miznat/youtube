@@ -16,13 +16,17 @@
 
 #import "CustomCell.h"
 
+
 @interface KKViewController ()
+
+
 
 @end
 
-@implementation KKViewController
-
-
+@implementation KKViewController{
+    
+    int counter;
+}
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -32,61 +36,54 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    // link to the youtube channel or playlist NOTE: JSON and JSONC are not the same. Use JSONC, as far as i recall, its customised for youtube.
-    
-    NSString *urlAsString = @"http://gdata.youtube.com/feeds/api/playlists/PL7CF5B0AC3B1EB1D5?v=2&alt=jsonc&max-results=50";
-    
-    
-    NSURL *url = [NSURL URLWithString:urlAsString];
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-   // This will initiate the request and parse the data using apples JSONSerialization
-    
-   AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-       
-       
-       // I am using self.videoMetaData. I am defining it in the .h file as a property. This will let me use it anywhere in this .m file.
-       
-       
-       self.myJSON = [JSON valueForKey:@"data"];
-       
-       self.videoMetaData = [self.myJSON valueForKeyPath:@"items.video"];
 
-       NSLog(@" KKVC video Meta Data %@", self.videoMetaData);
-       
-       
-       
-       // This will have all the sq and hq thumbnails
-       
-       self.allThumbnails = [JSON valueForKeyPath:@"data.items.video.thumbnail"];
-       
-       // Grab the video ID
-       
-       self.videoID = [JSON valueForKeyPath:@"data.items.video.id"];
-       
-       // The table need to be reloaded or else we will get an empty table.
-       
-       [self.tableView reloadData]; // Must Reload
-       
-      // NSLog(@" video Meta Data %@", self.videoMetaData);
-       
-       
-       
+-(void)viewDidLoad {
+    [super viewDidLoad];
+    counter = 0;
+    NSString *urlAsString = @"http://gdata.youtube.com/feeds/api/playlists/PL7CF5B0AC3B1EB1D5?v=2&alt=jsonc&max-results=50";
+    NSString *urlAsString2 = @"http://gdata.youtube.com/feeds/api/playlists/PL7CF5B0AC3B1EB1D5?v=2&alt=jsonc&max-results=50&start-index=51";
     
+    self.urlStrings = @[urlAsString,urlAsString2];
+    
+    self.allThumbnails = [NSMutableArray array];
+    
+    self.videoMetaData = [NSMutableArray array];
+    
+    self.videoID = [NSMutableArray array];
+    
+    [self getJSONFromURL:self.urlStrings[0]];
+}
+
+
+-(void)getJSONFromURL:(NSString *) urlString {
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
-    }];
+        self.myJSON = [JSON valueForKey:@"data"];
+        
+        [self.allThumbnails addObjectsFromArray:[self.myJSON valueForKeyPath:@"items.video.thumbnail"]];
+        
+        [self.videoMetaData  addObjectsFromArray:[self.myJSON valueForKeyPath:@"items.video"]];
+        
+        [self.videoID addObjectsFromArray:[self.myJSON valueForKeyPath:@"items.video.id"]];
+        
+        [self.tableView reloadData];
+        
+        counter += 1;
+        
+        if (counter < self.urlStrings.count) [self getJSONFromURL:self.urlStrings[counter]];
+    }
+                                                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);}];
+    
     
     [operation start];
     
     
 }
+
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -105,9 +102,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-  return [self.videoMetaData count];
-
+    
+    return [self.videoMetaData count];
+    
 }
 
 
@@ -128,6 +125,7 @@
     NSDictionary *titles = [self.videoMetaData objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [titles objectForKey:@"title"];
+    
     cell.detailTextLabel.text = [titles objectForKey:@"description"];
     
     NSDictionary *thumbnails = [self.allThumbnails objectAtIndex:indexPath.row];
@@ -138,14 +136,37 @@
     
     [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"fakeThumbnail.png"]];
     
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    
-    //cell.imageView.contentMode = UIViewContentModeCenter;
-    
     return cell;
 }
 
-
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    static NSString *CellID = @"Cell";
+//
+//    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID];
+//    if (cell == nil) {
+//        cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellID];
+//    }
+//
+//    // Configure the cell...
+//    NSDictionary *titles = [self.videoMetaData objectAtIndex:indexPath.row];
+//
+//    cell.textLabel.text = [titles objectForKey:@"title"];
+//    cell.detailTextLabel.text = [titles objectForKey:@"description"];
+//
+//    NSDictionary *thumbnails = [self.allThumbnails objectAtIndex:indexPath.row];
+//
+//    //NSLog(@"%@",thumbnails);
+//
+//    NSURL *url = [[NSURL alloc] initWithString:[thumbnails objectForKey:@"hqDefault"]];
+//
+//    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"fakeThumbnail.png"]];
+//
+//    //cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+//    return cell;
+//
+//}
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -154,20 +175,11 @@
     {
         NSDictionary *importVideoMetaData = [self.videoMetaData objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         
-        // Sending video metadata to the next view
-        
         [segue.destinationViewController setImportVideoMetaData:importVideoMetaData];
         
-        NSDictionary *importThumbnail = [self.allThumbnails objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
+        NSDictionary *importAllThumbnails = [self.allThumbnails objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         
-        // Sending thumbnails to the next view
-        
-        [segue.destinationViewController setImportThumbnail:importThumbnail];
-        
-        
-        NSLog(@" sending HQ & SQ thumbnails %@", importThumbnail);
-        
-        // Sending the video ID to the next view
+        [segue.destinationViewController setImportThumbnail:importAllThumbnails];
         
         NSDictionary *importVideoID = [self.videoID objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         
@@ -178,5 +190,17 @@
     }
 }
 
+//#pragma mark - Table view delegate
+//
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // Navigation logic may go here. Create and push another view controller.
+//    /*
+//     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+//     // ...
+//     // Pass the selected object to the new view controller.
+//     [self.navigationController pushViewController:detailViewController animated:YES];
+//     */
+//}
 
 @end
