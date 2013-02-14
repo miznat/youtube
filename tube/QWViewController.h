@@ -18,11 +18,15 @@
 
 @property (nonatomic, retain) NSMutableArray *myJSON;
 
+@property (nonatomic, retain) NSMutableArray *myData;
+
 @property (nonatomic, retain) NSURL *myurl;
 
 @property (weak, nonatomic) IBOutlet UIImageView *cellimage;
 
 @property (nonatomic, retain) NSMutableArray *videoID;
+
+@property (strong,nonatomic) NSArray *urlStrings;
 
 @end
 

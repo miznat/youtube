@@ -18,11 +18,14 @@
 
 @interface QWViewController ()
 
+
+
 @end
 
-@implementation QWViewController
+@implementation QWViewController{
 
-
+int counter;
+}
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -33,81 +36,38 @@
 }
 
 
--(void)viewWillAppear:(BOOL)animated {
-    
-    [super viewWillAppear:animated];
-    //[super viewDidLoad];
-    
+-(void)viewDidLoad {
+    [super viewDidLoad];
+    counter = 0;
     NSString *urlAsString = @"http://gdata.youtube.com/feeds/api/playlists/PL7CF5B0AC3B1EB1D5?v=2&alt=jsonc&max-results=50";
-    
-    
-    // I am not sure how i am supposed to populate the uitableview with the second link :(
-    
-     NSString *urlAsString2 = @"http://gdata.youtube.com/feeds/api/playlists/PL7CF5B0AC3B1EB1D5?v=2&alt=jsonc&max-results=50&start-index=51";
-    
-    
-    
-    self.myurl = [NSURL URLWithString:urlAsString];
- 
-    [self getJSONfromURL:self.myurl];
-     // [self.tableView reloadData];
-    
+    NSString *urlAsString2 = @"http://gdata.youtube.com/feeds/api/playlists/PL7CF5B0AC3B1EB1D5?v=2&alt=jsonc&max-results=50&start-index=51";
+    self.urlStrings = @[urlAsString,urlAsString2];
+    self.allThumbnails = [NSMutableArray array];
+    self.videoMetaData = [NSMutableArray array];
+    [self getJSONFromURL:self.urlStrings[0]];
 }
 
 
--(void)viewDidAppear:(BOOL)animated {
-    
-        [super viewDidAppear:animated]; 
-    
-        self.videoMetaData = [self.myJSON valueForKeyPath:@"items.video"];
-    
-        NSLog(@" QQVC video Meta Data %@", self.myJSON);
-    
-        
-        self.allThumbnails = [self.myJSON valueForKeyPath:@"items.video.thumbnail"];
-        
-        
-        // The table need to be reloaded or else we will get an empty table.
-        
-        [self.tableView reloadData]; // Must Reload
-        
-        // NSLog(@" video Meta Data %@", self.videoMetaData);
-        
-    
-}
-
-
--(void)getJSONfromURL:(NSURL *)url {
-    
+-(void)getJSONFromURL:(NSString *) urlString {
+    NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    // setup AFNetworking stuff
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        // call delegate or processing method on success
-        
-       // [self.myJSON = (NSArray *)JSON];
-        
         self.myJSON = [JSON valueForKey:@"data"];
-        
-       // [self.tableView reloadData];
-        
-       //NSLog(@" in get JSon method %@", self.myJSON);
-        
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
-    }];
+        [self.allThumbnails addObjectsFromArray:[self.myJSON valueForKeyPath:@"items.video.thumbnail"]];
+        [self.videoMetaData  addObjectsFromArray:[self.myJSON valueForKeyPath:@"items.video"]];
+        [self.tableView reloadData];
+        counter += 1;
+        if (counter < self.urlStrings.count) [self getJSONFromURL:self.urlStrings[counter]];
+    }
+        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);}];
     
     
     [operation start];
-    
-    [self.tableView reloadData];
+
+
 }
 
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-   // [self.tableView reloadData];
-}
 
 
 - (void)didReceiveMemoryWarning

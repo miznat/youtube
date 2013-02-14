@@ -188,7 +188,7 @@
             </objects>
             <point key="canvasLocation" x="-1961" y="-646"/>
         </scene>
-        <!--View Controller - QW-->
+        <!--View Controller-->
         <scene sceneID="doY-w3-jg0">
             <objects>
                 <tableViewController id="8sq-Jo-5am" customClass="QWViewController" sceneMemberID="viewController">
@@ -229,7 +229,7 @@
                             <outlet property="delegate" destination="8sq-Jo-5am" id="HtC-Du-eO3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="QW" id="weT-NA-lEH"/>
+                    <navigationItem key="navigationItem" id="weT-NA-lEH"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="anB-tX-Z55" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -279,30 +279,6 @@
             <point key="canvasLocation" x="-392" y="-648"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="KKDetailsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/KKDetailsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="KKViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/KKViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="cellimage" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="QWViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/QWViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="cellimage" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
