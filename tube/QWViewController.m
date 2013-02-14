@@ -50,7 +50,7 @@
     self.myurl = [NSURL URLWithString:urlAsString];
  
     [self getJSONfromURL:self.myurl];
-     [self.tableView reloadData];   
+     // [self.tableView reloadData];
     
 }
 
@@ -61,10 +61,10 @@
     
         self.videoMetaData = [self.myJSON valueForKeyPath:@"items.video"];
     
-        NSLog(@" QQVC video Meta Data %@", self.videoMetaData);
+        NSLog(@" QQVC video Meta Data %@", self.myJSON);
     
         
-        self.allThumbnails = [self.myJSON valueForKeyPath:@"data.items.video.thumbnail"];
+        self.allThumbnails = [self.myJSON valueForKeyPath:@"items.video.thumbnail"];
         
         
         // The table need to be reloaded or else we will get an empty table.
@@ -88,6 +88,8 @@
         
         self.myJSON = [JSON valueForKey:@"data"];
         
+       // [self.tableView reloadData];
+        
        //NSLog(@" in get JSon method %@", self.myJSON);
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
@@ -104,7 +106,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.tableView reloadData];
+   // [self.tableView reloadData];
 }
 
 
