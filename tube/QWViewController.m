@@ -50,7 +50,7 @@
     self.myurl = [NSURL URLWithString:urlAsString];
  
     [self getJSONfromURL:self.myurl];
-    
+     [self.tableView reloadData];   
     
 }
 
@@ -96,12 +96,15 @@
     
     
     [operation start];
+    
+    [self.tableView reloadData];
 }
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.tableView reloadData];
 }
 
 
