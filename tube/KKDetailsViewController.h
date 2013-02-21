@@ -8,13 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KKDetailsViewController : UIViewController
+
+@interface KKDetailsViewController : UIViewController {
+    
+    IBOutlet UIWebView *videoView;
+}
 
 @property (weak, nonatomic) NSDictionary *importVideoMetaData;
 
 @property (weak, nonatomic) NSDictionary *importThumbnail;
 
-@property (weak, nonatomic) NSDictionary *importVideoID;
+@property (weak, nonatomic) NSString *importVideoID;
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 

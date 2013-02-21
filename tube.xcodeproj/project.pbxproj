@@ -162,11 +162,12 @@
 			children = (
 				33B5EB8C16C07AFD00FEF5F1 /* AppDelegate.h */,
 				33B5EB8D16C07AFD00FEF5F1 /* AppDelegate.m */,
+				33B5EBA316C07E9F00FEF5F1 /* Channels */,
+				33EF660216D3633E001CB330 /* Player */,
 				334DF7AA16C31E6B00FB642D /* CustomCell.h */,
 				334DF7AB16C31E6B00FB642D /* CustomCell.m */,
 				33B5EB9516C07AFD00FEF5F1 /* MainStoryboard.storyboard */,
 				334DF7A716C30A9B00FB642D /* image */,
-				33B5EBA316C07E9F00FEF5F1 /* Channels */,
 				33B5EB8416C07AFD00FEF5F1 /* Supporting Files */,
 				339DAD5C16C1534E00D2DE94 /* AFNetworking */,
 			);
@@ -190,16 +191,23 @@
 		33B5EBA316C07E9F00FEF5F1 /* Channels */ = {
 			isa = PBXGroup;
 			children = (
-				334DF7BC16C9B99900FB642D /* UIWebView+YouTube.h */,
-				334DF7BD16C9B99A00FB642D /* UIWebView+YouTube.m */,
 				33B5EBA416C07F0D00FEF5F1 /* KKViewController.h */,
 				33B5EBA516C07F0D00FEF5F1 /* KKViewController.m */,
 				334DF7B916C71F3400FB642D /* QWViewController.h */,
 				334DF7BA16C71F3400FB642D /* QWViewController.m */,
+			);
+			name = Channels;
+			sourceTree = "<group>";
+		};
+		33EF660216D3633E001CB330 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				334DF7BC16C9B99900FB642D /* UIWebView+YouTube.h */,
+				334DF7BD16C9B99A00FB642D /* UIWebView+YouTube.m */,
 				83A6A6D416C3E890003E2313 /* KKDetailsViewController.h */,
 				83A6A6D516C3E890003E2313 /* KKDetailsViewController.m */,
 			);
-			name = Channels;
+			name = Player;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

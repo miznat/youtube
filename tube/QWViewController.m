@@ -41,15 +41,9 @@ int counter;
     counter = 0;
     NSString *urlAsString = @"http://gdata.youtube.com/feeds/api/playlists/PL7CF5B0AC3B1EB1D5?v=2&alt=jsonc&max-results=50";
     NSString *urlAsString2 = @"http://gdata.youtube.com/feeds/api/playlists/PL7CF5B0AC3B1EB1D5?v=2&alt=jsonc&max-results=50&start-index=51";
-    
     self.urlStrings = @[urlAsString,urlAsString2];
-    
     self.allThumbnails = [NSMutableArray array];
-    
     self.videoMetaData = [NSMutableArray array];
-    
-    self.videoID = [NSMutableArray array];
-    
     [self getJSONFromURL:self.urlStrings[0]];
 }
 
@@ -138,34 +132,6 @@ int counter;
     return cell;
 }
 
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *CellID = @"Cell";
-//
-//    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:CellID];
-//    if (cell == nil) {
-//        cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellID];
-//    }
-//
-//    // Configure the cell...
-//    NSDictionary *titles = [self.videoMetaData objectAtIndex:indexPath.row];
-//
-//    cell.textLabel.text = [titles objectForKey:@"title"];
-//    cell.detailTextLabel.text = [titles objectForKey:@"description"];
-//
-//    NSDictionary *thumbnails = [self.allThumbnails objectAtIndex:indexPath.row];
-//
-//    //NSLog(@"%@",thumbnails);
-//
-//    NSURL *url = [[NSURL alloc] initWithString:[thumbnails objectForKey:@"hqDefault"]];
-//
-//    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"fakeThumbnail.png"]];
-//
-//    //cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-//    return cell;
-//
-//}
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -180,7 +146,7 @@ int counter;
         
         [segue.destinationViewController setImportThumbnail:importAllThumbnails];
         
-        NSDictionary *importVideoID = [self.videoID objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
+        NSString *importVideoID = [self.videoID objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
         
         [segue.destinationViewController setImportVideoID:importVideoID];
         
