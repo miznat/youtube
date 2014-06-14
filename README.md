@@ -1,4 +1,3 @@
-I am trying to make an app which asyncronously downloads thumbnails and title from youtube playlists/channels using AFNetworking. 
-
+This app demonstrates how to asyncronously download thumbnails and title from youtube playlists/channels using AFNetworking.
 
 
